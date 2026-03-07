@@ -1,9 +1,8 @@
-using DataStructures
+using DataStructures: BinaryMinHeap
 
-function dijkstra(g::AdjacencyListGraph{T}, source::Int) where T
+function dijkstra(g::AbstractGraph{T}, source::Int) where T
     n = num_vertices(g)
-    dist = Vector{T}(undef, n)
-    fill!(dist, typemax(T))
+    dist = fill(infinity(T), n)
     dist[source] = zero(T)
 
     pq = BinaryMinHeap{Tuple{T, Int}}()

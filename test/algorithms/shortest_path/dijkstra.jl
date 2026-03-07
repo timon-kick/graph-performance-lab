@@ -29,7 +29,7 @@ end
         add_edge!(g, 4, 5, 1.0)
 
         dist = dijkstra(g, 1)
-        @test dist ≈ [0.0, 2.0, 3.0, 9.0, 7.0]
+        @test dist ≈ [0.0, 2.0, 3.0, 9.0, 6.0]
     end
 
     @testset "disconnected graph" begin

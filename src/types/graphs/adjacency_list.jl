@@ -4,7 +4,8 @@ mutable struct AdjacencyListGraph{T} <: AbstractGraph{T}
 end
 
 function AdjacencyListGraph{T}(n::Int) where T
-    return AdjacencyListGraph{T}(fill(Vector{Edge{T}}(), n), 0)
+    adj = [Vector{Edge{T}}() for _ in 1:n]
+    return AdjacencyListGraph{T}(adj, 0)
 end
 
 num_vertices(g::AdjacencyListGraph) = length(g.adj)
