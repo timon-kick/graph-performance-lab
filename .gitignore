@@ -1,1 +1,4 @@
 .vscode/
+graphs/datasets
+graphs/cleaner.jl
+debug.jl

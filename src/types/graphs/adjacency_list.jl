@@ -1,20 +1,18 @@
-mutable struct AdjacencyListGraph{T} <: AbstractGraph{T}
+struct AdjacencyListGraph{T} <: AbstractGraph{T}
     adj::Vector{Vector{Edge{T}}}
-    m::Int
+
+    function AdjacencyListGraph{T}(n::Int, edge_list::Vector{Tuple{Int, Int, T}}) where T
+        adj = [Vector{Edge{T}}() for _ in 1:n]
+        for (u, v, w) in edge_list
+            push!(adj[u], Edge(v, w))
+        end
+        new{T}(adj)
+    end
 end
 
-function AdjacencyListGraph{T}(n::Int) where T
-    adj = [Vector{Edge{T}}() for _ in 1:n]
-    return AdjacencyListGraph{T}(adj, 0)
-end
+AdjacencyListGraph(n::Int, edge_list::Vector{Tuple{Int, Int, T}}) where T =
+    AdjacencyListGraph{T}(n, edge_list)
 
 num_vertices(g::AdjacencyListGraph) = length(g.adj)
 
-num_edges(g::AdjacencyListGraph) = g.m
-
-neighbors(g::AdjacencyListGraph, u::Int) = g.adj[u]
-
-function add_edge!(g::AdjacencyListGraph{T}, u::Int, v::Int, w::T) where T
-    push!(g.adj[u], Edge(v, w))
-    g.m += 1
-end
+edges(g::AdjacencyListGraph, v::Int) = g.adj[v]
