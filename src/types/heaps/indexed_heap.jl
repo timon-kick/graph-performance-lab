@@ -2,15 +2,15 @@ mutable struct IndexedMinHeap{T}
     vertices::Vector{Int} # todo: benchmark vector of (v, dist) tuples against current version
     distances::Vector{T}
     idx::Vector{Int} # idx[v] := index of vertex v in the heap (i.e., vertices and distances), 0 if not present
-end
 
-function IndexedMinHeap{T}(n::Int) where T
-    vertices = Vector{Int}()
-    sizehint!(vertices, n)
-    distances = Vector{T}()
-    sizehint!(distances, n)
-    idx = fill(0, n)
-    return IndexedMinHeap{T}(vertices, distances, idx)
+    function IndexedMinHeap{T}(n::Int) where T
+        vertices = Vector{Int}()
+        sizehint!(vertices, n)
+        distances = Vector{T}()
+        sizehint!(distances, n)
+        idx = fill(0, n)
+        return new{T}(vertices, distances, idx)
+    end
 end
 
 Base.isempty(h::IndexedMinHeap) = isempty(h.vertices)

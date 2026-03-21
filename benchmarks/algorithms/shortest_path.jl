@@ -8,9 +8,15 @@ function benchmark()
     adj = AdjacencyListGraph(n, g)
     csr = CSRGraph(n, g)
 
+    println("Lazy Dijkstra, adjacency list:")
     @btime dijkstra($adj, 1)
+
+    println("\nIndexed Dijkstra, adjacency list:")
     @btime dijkstra_indexed($adj, 1)
 
+    println("\nLazy Dijkstra, CSR:")
     @btime dijkstra($csr, 1)
+
+    println("\nIndexed Dijkstra, CSR:")
     @btime dijkstra_indexed($csr, 1)
 end

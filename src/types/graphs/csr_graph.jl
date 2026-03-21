@@ -3,7 +3,7 @@ struct CSRGraph{T} <: AbstractGraph{T}
     offsets::Vector{Int}
     edges::Vector{Edge{T}}
 
-    function CSRGraph{T}(n::Int, edge_list::Vector{Tuple{Int, Int, T}}) where T
+    function CSRGraph(n::Int, edge_list::Vector{Tuple{Int, Int, T}}) where T
         m = length(edge_list)
 
         # count outgoing edges
@@ -29,9 +29,6 @@ struct CSRGraph{T} <: AbstractGraph{T}
         new{T}(offsets, edges)
     end
 end
-
-CSRGraph(n::Int, edge_list::Vector{Tuple{Int,Int,T}}) where T =
-    CSRGraph{T}(n, edge_list)
 
 num_vertices(g::CSRGraph) = length(g.offsets) - 1
 

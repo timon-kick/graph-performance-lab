@@ -55,9 +55,9 @@ end
     end
 
     @testset "twitter graph" begin
-        edges = read_graph("congress-twitter.txt")
+        n, edges = read_graph("snap/congress-twitter.txt")
         for Graph in [AdjacencyListGraph, CSRGraph]
-            g = Graph(475, edges)
+            g = Graph(n, edges)
             dist = dijkstra(g, 1)
             dist_indexed = dijkstra_indexed(g, 1)
             @test dist ≈ dist_indexed
